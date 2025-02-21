@@ -20,4 +20,8 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommunicationTextBox.Common\CommunicationTextBox.Common.csproj" />
+  </ItemGroup>
+
 </Project>

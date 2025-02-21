@@ -1,8 +1,8 @@
-﻿using CommunicationTextbox.Models;
+﻿using CommunicationTextBox.Common.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace CommunicationTextbox.ViewModels;
+namespace CommunicationTextBox.Common.ViewModels;
 
 public partial class MainContentViewModel : ObservableObject
 {

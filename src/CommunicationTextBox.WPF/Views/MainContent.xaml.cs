@@ -1,4 +1,4 @@
-﻿using CommunicationTextbox.ViewModels;
+﻿using CommunicationTextBox.Common.ViewModels;
 using System.Windows.Controls;
 
 namespace CommunicationTextbox.Views;

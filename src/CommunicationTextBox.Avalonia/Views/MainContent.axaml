@@ -1,50 +1,48 @@
-﻿<UserControl
-    x:Class="CommunicationTextbox.Views.MainContent"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:CommunicationTextbox.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:md="clr-namespace:CommunicationTextbox.Models"
+<UserControl
+    Background="#bacee0"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Background="#bacee0"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    x:Class="CommunicationTextBox.Avalonia.Views.MainContent"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="clr-namespace:CommunicationTextBox.Common.Models;assembly=CommunicationTextBox.Common"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <Geometry x:Key="TailPath">M5.2604167,5.1614583 L5.2604167,0.072916826 0.010416508,0.072916826 0.010416508,0.85209977 z</Geometry>
-
-        <Style x:Key="TailIcon" TargetType="{x:Type Path}">
+    </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="Path.TailIcon">
             <Setter Property="Data" Value="{StaticResource TailPath}" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="UseLayoutRounding" Value="True" />
             <Setter Property="Width" Value="6" />
             <Setter Property="Height" Value="6" />
         </Style>
-
-        <Style x:Key="Tail" TargetType="{x:Type Control}">
+        <Style Selector="ContentControl.Tail">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Control}">
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
                         <Grid Margin="0,4,-2,0">
-                            <Path Fill="#B0C3D4" Style="{StaticResource TailIcon}" />
-                            <Path Fill="{TemplateBinding Background}" Style="{StaticResource TailIcon}" />
+                            <Path Classes="TailIcon" Fill="#B0C3D4" />
+                            <Path Classes="TailIcon" Fill="{TemplateBinding Background}" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-    </UserControl.Resources>
+    </UserControl.Styles>
     <ItemsControl ItemsSource="{Binding Messages}">
-        <ItemsControl.Resources>
-            <DataTemplate DataType="{x:Type md:MyMessageModel}">
+        <ItemsControl.DataTemplates>
+            <DataTemplate DataType="md:MyMessageModel">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <TextBlock
-                        Margin="0,0,5,0"
-                        VerticalAlignment="Bottom"
                         FontSize="10"
-                        Text="{Binding ArriveTime, StringFormat=HH:mm}" />
+                        Margin="0,0,5,0"
+                        Text="{Binding ArriveTime, StringFormat=HH:mm}"
+                        VerticalAlignment="Bottom" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -53,41 +51,41 @@
                         <StackPanel />
                         <Border Background="#B0C3D4" CornerRadius="2" />
                         <Border
-                            Margin="0.51,0,0.51,0.51"
-                            Padding="5,3"
                             Background="#ffeb33"
-                            CornerRadius="2">
+                            CornerRadius="2"
+                            Margin="0.51,0,0.51,0.51"
+                            Padding="5,3">
                             <TextBlock FontSize="14" Text="{Binding Message}" />
                         </Border>
-                        <Control
-                            Grid.Column="1"
+                        <ContentControl
                             Background="#ffeb33"
-                            Style="{StaticResource Tail}">
-                            <Control.LayoutTransform>
+                            Classes="Tail"
+                            Grid.Column="1">
+                            <ContentControl.RenderTransform>
                                 <ScaleTransform ScaleX="-1" />
-                            </Control.LayoutTransform>
-                        </Control>
+                            </ContentControl.RenderTransform>
+                        </ContentControl>
                     </Grid>
                 </StackPanel>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type md:YouMessageModel}">
+            <DataTemplate DataType="md:YouMessageModel">
                 <StackPanel Orientation="Horizontal">
                     <Viewbox
-                        Width="25"
                         Height="25"
-                        Margin="0,0,5,0">
+                        Margin="0,0,5,0"
+                        Width="25">
                         <Viewbox.Clip>
                             <EllipseGeometry
                                 Center="12.5,12.5"
                                 RadiusX="12.5"
                                 RadiusY="12.5" />
                         </Viewbox.Clip>
-                        <Image Source="pack://application:,,,/Resources/profile.jpg" />
+                        <Image Source="avares://CommunicationTextBox.Avalonia/Resources/profile.jpg" />
                     </Viewbox>
                     <StackPanel>
                         <TextBlock
-                            Margin="0,0,0,5"
                             FontSize="11"
+                            Margin="0,0,0,5"
                             Text="{Binding Id}" />
                         <StackPanel Orientation="Horizontal">
                             <Grid>
@@ -95,37 +93,37 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Control Background="White" Style="{StaticResource Tail}" />
+                                <ContentControl Background="White" Classes="Tail" />
                                 <Border
-                                    Grid.Column="1"
                                     Background="#B0C3D4"
-                                    CornerRadius="2" />
+                                    CornerRadius="2"
+                                    Grid.Column="1" />
                                 <Border
+                                    Background="White"
+                                    CornerRadius="2"
                                     Grid.Column="1"
                                     Margin="0.51,0,0.51,0.51"
-                                    Padding="5,3"
-                                    Background="White"
-                                    CornerRadius="2">
+                                    Padding="5,3">
                                     <TextBlock FontSize="14" Text="{Binding Message}" />
                                 </Border>
                             </Grid>
                             <TextBlock
-                                Margin="5,0,0,0"
-                                VerticalAlignment="Bottom"
                                 FontSize="10"
-                                Text="{Binding ArriveTime, StringFormat=HH:mm}" />
+                                Margin="5,0,0,0"
+                                Text="{Binding ArriveTime, StringFormat=HH:mm}"
+                                VerticalAlignment="Bottom" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>
-        </ItemsControl.Resources>
+        </ItemsControl.DataTemplates>
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type md:MessageModel}">
                 <ContentControl
-                    Width="200"
+                    Content="{Binding}"
                     Margin="0,0,0,4"
                     Padding="8,4,8,4"
-                    Content="{Binding}" />
+                    Width="200" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
